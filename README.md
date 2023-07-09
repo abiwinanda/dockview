@@ -1,5 +1,9 @@
 # Dockview
 
+Sample app to show how to dockerize phoenix liveview app.
+
+## Build the Image
+
 To build the docker image you can run
 
 ```sh
