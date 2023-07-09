@@ -25,6 +25,7 @@ config :dockview, DockviewWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: DockviewWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Dockview.PubSub,
+  secret_key_base: "kh5nqyB3Q5/LOZkRD/r85wddpWOCI6qX/7ixnghM2hd4WFz3N8enVFPx/8gu2w5E",
   live_view: [signing_salt: "b3Y+GMZh"]
 
 # Configures the mailer
