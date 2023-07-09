@@ -6,7 +6,7 @@ To build the docker image you can run
 docker build -t dockview .
 ```
 
-this will create an image called `dockerview:latest`.
+this will create an image called `dockview:latest`.
 
 To start a container from the image run `
 
