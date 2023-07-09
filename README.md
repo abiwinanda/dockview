@@ -1,15 +1,11 @@
 # Dockview
 
-To start your Phoenix server:
+To build the docker image you can run `docker build -t dockview .`, this will create an image `dockerview:latest`.
 
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
-- Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+To start a container from the image run `docker container run -p 4000:4000 --name dockviewcon -d dockview`.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+The command will run a container called `dockviewcon` with a detach mode (i.e running in the background) using the image `dockview`. The container will be accessible through localhost port `4000`.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
+## Reference
 
 - https://blog.miguelcoba.com/deploying-a-phoenix-16-app-with-docker-and-elixir-releases
