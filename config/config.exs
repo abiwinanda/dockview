@@ -10,6 +10,16 @@ import Config
 config :dockview,
   ecto_repos: [Dockview.Repo]
 
+# Configure your database
+config :dockview, Dockview.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "dockview",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # Configures the endpoint
 config :dockview, DockviewWeb.Endpoint,
   url: [host: "localhost"],
