@@ -1,7 +1,7 @@
-ARG MIX_ENV="prod"
-
 # build stage
 FROM hexpm/elixir:1.12.3-erlang-24.1.2-alpine-3.14.2 AS build
+
+ARG MIX_ENV="prod"
 
 RUN apk add --no-cache build-base git python3 curl
 
@@ -12,38 +12,28 @@ RUN mix local.hex --force && \
 
 ENV MIX_ENV="${MIX_ENV}"
 
-# install mix dependencies
 COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
 
-# copy compile configuration files
 RUN mkdir config
 COPY config/config.exs config/$MIX_ENV.exs config/
 
-# compile dependencies
 RUN mix deps.compile
 
-# copy assets
 COPY priv priv
 COPY assets assets
-
-# Compile assets
 RUN mix assets.deploy
 
-# compile project
 COPY lib lib
 RUN mix compile
 
-# copy runtime configuration file
 COPY config/runtime.exs config/
-
-# assemble release
 RUN mix release
 
 # app stage
 FROM alpine:3.14.2 AS app
 
-ARG MIX_ENV
+ARG MIX_ENV="prod"
 
 RUN apk add --no-cache libstdc++ openssl ncurses-libs
 
@@ -68,8 +58,8 @@ RUN \
 USER "${USER}"
 
 # copy release executables
-COPY --from=build --chown="${USER}":"${USER}" /app/_build/"${MIX_ENV}"/rel/saturn ./
+COPY --from=build --chown="${USER}":"${USER}" /app/_build/"${MIX_ENV}"/rel/dockview ./
 
-ENTRYPOINT ["bin/saturn"]
+ENTRYPOINT ["bin/dockview"]
 
 CMD ["start"]
